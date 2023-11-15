@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: CITIC
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456xxlBUPT
+    url: jdbc:mysql://bj-cynosdbmysql-grp-0t58ywes.sql.tencentcdb.com:24183/citic?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true
