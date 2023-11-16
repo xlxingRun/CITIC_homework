@@ -4,6 +4,7 @@ import cn.xiaolin.citic.common.req.TUserReqDto;
 import cn.xiaolin.citic.domain.entity.TUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -35,4 +36,6 @@ public interface TUserService extends IService<TUser> {
      * @return
      */
     Optional<TUser> deleteAndReturnById(Long id);
+
+    List<TUser> listUsers();
 }

@@ -5,10 +5,12 @@ import cn.xiaolin.citic.domain.entity.TUser;
 import cn.xiaolin.citic.common.resp.Result;
 import cn.xiaolin.citic.service.TUserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -17,6 +19,7 @@ import java.util.Optional;
  * @create 2023/11/15
  */
 
+@Tag(name = "用户信息")
 @RestController
 @RequiredArgsConstructor
 public class TUserController {
@@ -48,5 +51,12 @@ public class TUserController {
     public Result<TUser> deleteOne(@PathVariable Long id) {
         Optional<TUser> item = tUserService.deleteAndReturnById(id);
         return item.map(Result::ok).orElseGet(Result::badRequest);
+    }
+
+    @Operation(summary = "查询所有用户")
+    @GetMapping("/user/all")
+    public Result<List<TUser>> listUsers() {
+        List<TUser> userList = tUserService.listUsers();
+        return Result.ok(userList);
     }
 }
