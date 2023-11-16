@@ -58,7 +58,7 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser>
 
     /**
      * 更新并返回
-     *
+     * 不支持修改密码
      * @param dto
      * @return
      */
@@ -69,10 +69,9 @@ public class TUserServiceImpl extends ServiceImpl<TUserMapper, TUser>
         }
         LambdaUpdateWrapper<TUser> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.set(Objects.nonNull(dto.getIdCard()), TUser::getIdCard, dto.getIdCard())
+                .set(Objects.nonNull(dto.getUsername()), TUser::getUsername, dto.getUsername())
                 .set(Objects.nonNull(dto.getEmail()), TUser::getEmail, dto.getEmail())
                 .set(Objects.nonNull(dto.getPhone()), TUser::getPhone, dto.getPhone())
-                .set(Objects.nonNull(dto.getPassword()), TUser::getPassword, passwordEncoder.encode(dto.getPassword()))
-                .set(Objects.nonNull(dto.getUsername()), TUser::getUsername, dto.getUsername())
                 .eq(TUser::getId, dto.getId());
         boolean updated = update(updateWrapper);
         return updated ? findItemById(dto.getId()) : Optional.empty();
